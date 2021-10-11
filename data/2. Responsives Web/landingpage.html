@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            *{
+                color: black;
+            }
+            body{
+                background-color: #EBEAE6;
+            }
+            nav{
+                background-color: #363636;
+                text-align: center;
+                line-height: 50px;
+            }
+            .nav{
+                color: #D9D8D9;
+                display: inline;
+                font-size: 16px;
+                padding: 10px;
+            }
+            .main{
+                text-align: center;
+                font-size: 30px;
+            }
+            .container{
+                display: grid;
+                grid-template-columns: 30% 70%;
+                gap: 20px;
+            }
+            .content{
+                text-align: center;
+                font-size: 20px;
+            }
+            img{
+                width: 250px;
+                min-width: 150px;
+                border: 1px solid black;
+                border-radius: 10px;
+                margin-left: 10%;
+                margin-right: 10%;
+            }
+            .text{
+                margin: 30px;
+            }
+            .order{
+                background-color: #EA934B;
+                color: white;
+                border: 0px;
+                padding: 10px 50px;
+                font-weight: bold;
+                border-radius: 10px;
+                margin-left: 5px;
+                margin-right: 5px;
+            }
+            footer{
+                margin-top: 20px;
+                background-color: #061825;
+                height: 150px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            @media screen and (max-width: 600px) {
+                .container{
+                    text-align: center;
+                    grid-template-columns: 100%;
+                    grid-template-rows: 1fr 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <p class="nav">The book series</p>
+            <p class="nav">Testimonials</p>
+            <p class="nav">The Author</p>
+            <p class="nav">Free resources</p>
+        </nav>
+        <main>
+            <h1 class="main">You don't know JavaScript</h1>
+
+            <div class="container">
+                <div style="display: flex; justify-content: flex-end; align-items: center;">
+                    <img src=https://kaul.inf.h-brs.de/wem/assets/img/landing-img.png>
+                </div>
+                <div class="content">
+                    <p class="text">Don't just drift through JavaScript.</p>
+                    <p class="text">Understand how JavaScript works.</p>
+                    <p class="text">Start your journey through the bumpy side of JavaScript.</p>
+                    <button class="order">ORDER YOUR COPY NOW</button>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div class="footer">
+                <p style="color:white; text-align: center;">The first Ebook in the book series is absoletly free.</p>
+                <button class="order">FIND OUT MORE ABOUT THIS OFFER</button>
+            </div>
+        </footer>
+    </body>
+</html>
