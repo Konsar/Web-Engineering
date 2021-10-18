@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>JavaScript</title>
+
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    </head>
+    <body>
+        <h2>Aufgabe 3.1.1</h2>
+        <pre class="prettyprint">
+            function identity_function(argmuent) {
+                return function(){
+                    return argmuent;
+                };
+            }
+        </pre>
+        <p id="textausgabe3.1.1">
+            Wird die innere Funtkion aufgerufen, wird ganz genau das Argument durch die innere Funktion zurückgegeben. <br>
+            Es wird z.B. die identity_function("Hello World!")() aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.1"></p>
+        
+
+        <h2>Aufgabe 3.1.2</h2>
+        <pre class="prettyprint">
+            function addf(x){
+                return function(y){
+                    return x+y;
+                }
+            }
+        </pre>
+        <p id="textausgabe3.1.2">
+            Es wird die Funktion addf(10)(20) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.2"></p>
+        
+
+        <h2>Aufgabe 3.1.3</h2>
+        <pre class="prettyprint">
+            function add(x,y){
+                return x+y;
+            }
+            
+            function mul(x,y){
+                return x*y;
+            }
+            
+            function applyf(func){
+                return function(x){
+                    return function(y){
+                        return func(x,y);
+                    };
+                };
+            }
+        </pre>
+        <p id="textausgabe3.1.3.1">
+            Es wird die Funktion applyf(add)(10)(20) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.3.1"></p>
+        <p id="textausgabe3.1.3.2">
+            Es wird die Funktion applyf(mul)(10)(20) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.3.2"></p>
+        
+
+        <h2>Aufgabe 3.1.4</h2>
+        <pre class="prettyprint">
+            function curry(func, attr){
+                return function(y){
+                    return func(attr, y);
+                };
+            }
+        </pre>
+        <p id="textausgabe3.1.4.1">
+            Es wird die Funktion curry(add, 3)(4) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.4.1"></p>
+        <p id="textausgabe3.1.4.2">
+            Es wird die Funktion curry(add, 5)(6) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.4.2"></p>
+        
+
+        <h2>Aufgabe 3.1.5</h2>
+        <pre class="prettyprint">
+            function inc(x){
+                return addf(x)(1);
+            }
+        </pre>
+        <p id="textausgabe3.1.5">
+            Es wird die Funktion inc(5) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.5"></p>
+        
+
+        <h2>Aufgabe 3.1.6</h2>
+        <pre class="prettyprint">
+            function methodize(func){
+                return function(y){
+                    return func(this, y);
+                };
+            }
+        </pre>
+        <p id="textausgabe3.1.6">
+            Wird zunächst die ein Prototype angelegt mit der methodize-Funktion: <br>
+            Number.prototype.add = methodize(add); <br>
+            Kann anschließend auf eine Nummer die Funktion add ausgeführt werden. <br>
+            So ist für (3).add(5) die Rückgabe:
+        </p>
+        <p id="ausgabe3.1.6"></p>
+        
+
+        <h2>Aufgabe 3.1.7</h2>
+        <pre class="prettyprint">
+            function demethodize(func){
+                return function(x, y){
+                    return func.call(x, y);
+                };
+            }
+        </pre>
+        <p id="textausgabe3.1.7">
+            Es wird demethodize(Number.prototype.add)(5,6) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.7"></p>
+        
+
+        <h2>Aufgabe 3.1.8</h2>
+        <pre class="prettyprint">
+            function twice(func){
+                return function(x){
+                    return func(x,x);
+                };
+            }
+        </pre>
+        <p id="textausgabe3.1.8.1">
+            Es wird twice(add)(11) bzw. double(11) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.8.1"></p>
+        <p id="textausgabe3.1.8.2">
+            Es wird twice(mul)(11) bzw. square(11) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.8.2"></p>
+        
+
+        <h2>Aufgabe 3.1.9</h2>
+        <pre class="prettyprint">
+            function composeu(func1, func2){
+                return function(x){
+                    return func2(func1(x));
+                }
+            }
+        </pre>
+        <p id="textausgabe3.1.9">
+            Es wird composeu(double, square)(3) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.9"></p>
+        
+
+        <h2>Aufgabe 3.1.10</h2>
+        <pre class="prettyprint">
+            function composeb(func1, func2){
+                return function(x, y, z){
+                    return func2(func1(x,y),z);
+                }
+            }
+        </pre>
+        <p id="textausgabe3.1.10">
+            Es wird composeb(add, mul)(2, 3, 5) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.10"></p>
+        
+
+        <h2>Aufgabe 3.1.11</h2>
+        <pre class="prettyprint">
+            function once(func){
+                var error = false;
+                return function(x, y){
+                    if(error){
+                        throw "Already called once!";
+                    }else{
+                        error = true;
+                        return func(x,y);
+                    }
+                }
+            }
+        </pre>
+        <p id="textausgabe3.1.11.1">
+            Es wird add_once = once(add) festgelegt. Es wird add_once(3,4) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.11.1"></p>
+        <p id="textausgabe3.1.11.2">
+            Bei der zweiten Ausführung wird ein Fehler geworfen:
+        </p>
+        <p id="ausgabe3.1.11.2"></p>
+        
+
+        <h2>Aufgabe 3.1.12</h2>
+        <pre class="prettyprint">
+            function counterf(x){
+                return{
+                    inc:function(){
+                        x = x+1;
+                        return x; 
+                    },
+                    dec:function(){
+                        x = x-1;
+                        return x;
+                    }
+                }
+            }
+        </pre>
+        <p id="textausgabe3.1.12.1">
+            Es wird counter = counterf(10) festgelegt. Es wird counter.inc() aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.12.1"></p>
+        <p id="textausgabe3.1.12.2">
+            Anschließend wird counter.dec() aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.12.2"></p>
+        
+
+        <h2>Aufgabe 3.1.13</h2>
+        <pre class="prettyprint">
+            function revocable(func){
+                var error = false;
+                return{
+                    invoke:function(){
+                        if(error){
+                            return "Fehlerabbruch!"
+                        }else{
+                            return func.apply(this, arguments);
+                        }
+                    },
+                    revoke:function(){
+                        error = true;
+                    }
+                }
+            }
+        </pre>
+        <p id="textausgabe3.1.13.1">
+            Es wird temp = revocable(add) festgelegt. Es wird temp.invoke(7,10) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.13.1"></p>
+        <p id="textausgabe3.1.13.2">
+            Anschließend wird temp.revoke() aufgerufen. Ein erneutes Aufrufen von temp.invoke(7,10) liefert:
+        </p>
+        <p id="ausgabe3.1.13.2"></p>
+        
+
+        <h2>Aufgabe 3.1.14</h2>
+        <pre class="prettyprint">
+            function vector(){
+                arr = [];
+            
+                return{
+                    append:function(x){
+                        arr.push(x);
+                    },
+                    store:function(x, y){
+                        arr[x] = y;
+                    },
+                    get:function(x){
+                        return arr[x];
+                    }
+                }
+            }
+        </pre>
+        <p id="textausgabe3.1.14.1">
+            Es wird zunächst ein Wrapper my_vector = vector() angelegt. Anschließend wird my_vector.append(7) und my_vector.store(1,8) ausgeführt. <br>
+            Es wird nun my_vector.get(0) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.14.1"></p>
+        <p id="textausgabe3.1.14.2">
+            Zuletzt wird my_vector.get(1) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.1.14.2"></p>
+
+
+        <script src="JavaScript-1.js"></script>
+    </body>
+</html>
