@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>JavaScript</title>
+
+        <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    </head>
+    <body>
+        <h2>Aufgabe 3.2.1</h2>
+        <pre class="prettyprint">
+            function feedback(message){
+                return message;
+            }
+            
+            function pubsub(){
+                subscriptions = [];
+            
+                return{
+                    subscribe:function(subscriber){
+                        subscriptions.push(subscriber);
+                    },
+                    publish:function(publication){
+                        out = "";
+                        for(i = 0; i < subscriptions.length; i++){
+                            out += subscriptions[i](publication);
+                        }
+                        return out;
+                    },
+                    get:function(x){
+                        return subscriptions[x];
+                    }
+                }
+            }
+            
+            my_pubsub = pubsub();
+            my_pubsub.subscribe(feedback);
+            document.getElementById("ausgabe3.2.1").innerHTML = my_pubsub.publish("It works!");
+        </pre>
+        <p id="textausgabe3.2.1">
+            Es wird eine neue Funktion "feedback" definiert, damit die Webseite nicht mit Pop-Ups zugespammt wird, und wird statt "alert" genutzt.<br>
+            Die Funktion feedback wird hinzugefügt. Anschließend wird die Publikation veröffentlicht. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.2.1"></p>
+        
+        
+        <h2>Aufgabe 3.2.2</h2>
+        <pre class="prettyprint">
+            function gensymf(symbol){
+                counter = 0;
+            
+                return function(){
+                    return symbol + counter++;
+                }
+            }
+        </pre>
+        <p id="textausgabe3.2.2">
+            Die Funktion bekommt das Symbol G übergeben und wird 4-Mal aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.2.2"></p>
+        
+        
+        <h2>Aufgabe 3.2.3</h2>
+        <pre class="prettyprint">
+            function fibonaccif(value1, value2){
+                v1 = value1;
+                v2 = value2;
+            
+                return function(){
+                    temp = v1;
+                    v1 = v2;
+                    v2 += temp;
+                    return temp;
+                }
+            }
+        </pre>
+        <p id="textausgabe3.2.3">
+            Die Fibonacci-Folge wird mit 0 und 1 als Startwerte festgelegt. Anschließend wird die Folge 6-Mal aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.2.3"></p>
+        
+        
+        <h2>Aufgabe 3.2.4</h2>
+        <pre class="prettyprint">
+            function addg(value){
+                sum = value;
+            
+                return function inner(innervalue){
+                    if(innervalue == undefined){
+                        return sum;
+                    } else {
+                        sum += innervalue;
+                        return inner; //Zurückgeben zum Durchreichen
+                    }
+                }
+            }
+        </pre>
+        <p id="textausgabe3.2.4">
+            Es wird addg(3)(4)(5)() und addg(1)(2)(4)(8)() aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.2.4"></p>
+        
+        
+        <h2>Aufgabe 3.2.5</h2>
+        <pre class="prettyprint">
+            function add(x,y){
+                return x+y;
+            }
+            
+            function applyg(func){
+                values = [];
+            
+                return function inner(innervalue){
+                    if(innervalue == undefined){
+                        if(values.length == 0) throw "No values given!";
+                        result = values[0];
+                        for(i = 1; i < values.length; i++){
+                            result = func(result, values[i])
+                        }
+                        return result;
+                    } else {
+                        values.push(innervalue);
+                        return inner;
+                    }
+                }
+            }
+        </pre>
+        <p id="textausgabe3.2.5">
+            Es wird applyg(add)(3)(4)(5)() und applyg(add)(1)(2)(4)(8)() aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.2.5"></p>
+        
+        
+        <h2>Aufgabe 3.2.6</h2>
+        <pre class="prettyprint">
+            function m(value, source=value.toString()){
+                return {value, source};
+            }
+        </pre>
+        <p id="textausgabe3.2.6">
+            Es wird JSON.stringify(m(1)) und JSON.stringify(m(Math.PI, "pi")) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.2.6"></p>
+        
+        
+        <h2>Aufgabe 3.2.7</h2>
+        <pre class="prettyprint">
+            function addm(m1, m2){
+                return m(m1.value + m2.value, "(" + m1.source + "+" + m2.source + ")")
+            }
+        </pre>
+        <p id="textausgabe3.2.7">
+            Es wird JSON.stringify(addm(m(3), m(4))) aufgerufen. Die Rückgabe ist:
+        </p>
+        <p id="ausgabe3.2.7"></p>
+        
+        
+        <h2>Aufgabe 3.2.8</h2>
+        <pre class="prettyprint">
+
+        </pre>
+        <p id="textausgabe3.2.8">
+
+        </p>
+        <p id="ausgabe3.2.8"></p>
+        
+        
+        <h2>Aufgabe 3.2.9</h2>
+        <pre class="prettyprint">
+
+        </pre>
+        <p id="textausgabe3.2.9">
+
+        </p>
+        <p id="ausgabe3.2.9"></p>
+        
+        
+        <h2>Aufgabe 3.2.10</h2>
+        <pre class="prettyprint">
+
+        </pre>
+        <p id="textausgabe3.2.10">
+
+        </p>
+        <p id="ausgabe3.2.10"></p>
+        
+        
+        <h2>Aufgabe 3.2.11</h2>
+        <pre class="prettyprint">
+
+        </pre>
+        <p id="textausgabe3.2.11">
+
+        </p>
+        <p id="ausgabe3.2.11"></p>
+        
+        
+        <h2>Aufgabe 3.2.12</h2>
+        <pre class="prettyprint">
+
+        </pre>
+        <p id="textausgabe3.2.12">
+
+        </p>
+        <p id="ausgabe3.2.12"></p>
+        
+        
+        <h2>Aufgabe 3.2.13</h2>
+        <pre class="prettyprint">
+
+        </pre>
+        <p id="textausgabe3.2.13">
+
+        </p>
+        <p id="ausgabe3.2.13"></p>
+        
+        
+        <h2>Aufgabe 3.2.14</h2>
+        <pre class="prettyprint">
+
+        </pre>
+        <p id="textausgabe3.2.14">
+
+        </p>
+        <p id="ausgabe3.2.14"></p>
+        
+        
+        <h2>Aufgabe 3.2.15</h2>
+        <pre class="prettyprint">
+
+        </pre>
+        <p id="textausgabe3.2.15">
+
+        </p>
+        <p id="ausgabe3.2.15"></p>
+        
+        
+        <h2>Aufgabe 3.2.16</h2>
+        <pre class="prettyprint">
+
+        </pre>
+        <p id="textausgabe3.2.16">
+
+        </p>
+        <p id="ausgabe3.2.16"></p>
+
+
+        <script src="JavaScript-2.js"></script>
+    </body>
+</html>
