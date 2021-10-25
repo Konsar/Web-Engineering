@@ -60,7 +60,7 @@ function addg(value){
     sum = value;
 
     return function inner(innervalue){
-        if(innervalue == undefined){
+        if(typeof innervalue == "undefined"){
             return sum;
         } else {
             sum += innervalue;
@@ -80,7 +80,7 @@ function applyg(func){
     values = [];
 
     return function inner(innervalue){
-        if(innervalue == undefined){
+        if(typeof innervalue == "undefined"){
             if(values.length == 0) throw "No values given!";
             result = values[0];
             for(i = 1; i < values.length; i++){
@@ -105,52 +105,120 @@ document.getElementById("ausgabe3.2.6").innerHTML = JSON.stringify(m(1)) + "<br>
 
 // Aufgabe 3.2.7
 function addm(m1, m2){
-    return m(m1.value + m2.value, "(" + m1.source + "+" + m2.source + ")")
+    return m(m1.value + m2.value, "(" + m1.source + "+" + m2.source + ")");
 }
 
 document.getElementById("ausgabe3.2.7").innerHTML = JSON.stringify(addm(m(3), m(4)));
 
 // Aufgabe 3.2.8
+function binarymf(func, symbol){
+    return function(m1, m2){
+        return m(func(m1.value, m2.value), "(" + m1.source + symbol + m2.source + ")");
+    }
+}
 
-
-document.getElementById("ausgabe3.2.8").innerHTML = "";
+addm = binarymf(add, "+");
+document.getElementById("ausgabe3.2.8").innerHTML = JSON.stringify(addm(m(3), m(4)));
 
 // Aufgabe 3.2.9
+function binarymf(func, symbol){
+    return function(m1, m2){
+        if(typeof m1 == "number") m1 = m(m1);
+        if(typeof m2 == "number") m2 = m(m2);
+        return m(func(m1.value, m2.value), "(" + m1.source + symbol + m2.source + ")");
+    }
+}
 
-
-document.getElementById("ausgabe3.2.9").innerHTML = "";
+document.getElementById("ausgabe3.2.9").innerHTML = JSON.stringify(addm(3, 4));
 
 // Aufgabe 3.2.10
+function square(x){
+    return x*x;
+}
 
+function unarymf(func, symbol){
+    return function(m1){
+        if(typeof m1 == "number") m1 = m(m1);
+        return m(func(m1.value), "(" + symbol + " " + m1.value + ")");
+    }
+}
 
-document.getElementById("ausgabe3.2.10").innerHTML = "";
+squarem = unarymf(square, "square");
+document.getElementById("ausgabe3.2.10").innerHTML = JSON.stringify(squarem(4));
 
 // Aufgabe 3.2.11
+function hyp(a, b){
+    return Math.sqrt(a*a + b*b);
+}
 
-
-document.getElementById("ausgabe3.2.11").innerHTML = "";
+document.getElementById("ausgabe3.2.11").innerHTML = hyp(3, 4);
 
 // Aufgabe 3.2.12
+function add(x, y){
+    return x+y;
+}
 
+function mul(x, y){
+    return x*y;
+}
 
-document.getElementById("ausgabe3.2.12").innerHTML = "";
+function exp(arr){
+    if(typeof arr == "number") return arr;
+    else if(arr.length == 2){ //Unary functions -> 2 Parameters
+        return arr[0](exp(arr[1]));
+    } else if (arr.length == 3){ //Binary function -> 3 Parameters
+        return arr[0](exp(arr[1]), exp(arr[2]));
+    }
+}
+
+hypa = [ Math.sqrt, [ add, [mul, 3, 3], [mul, 4, 4] ] ];
+//hypa = [ square, [square, 2] ];
+document.getElementById("ausgabe3.2.12").innerHTML = exp(hypa);
 
 // Aufgabe 3.2.13
+function store(value){
+    variable = value;
+}
 
-
-document.getElementById("ausgabe3.2.13").innerHTML = "";
+var variable;
+store(5);
+document.getElementById("ausgabe3.2.13").innerHTML = variable === 5;
 
 // Aufgabe 3.2.14
+function identityf(argmuent) { //Is like identity_function from 3.1.1
+    return function(){
+        return argmuent;
+    };
+}
 
+function quatre(operatorf, operandf1, operandf2, resultf){
+    resultf(operatorf(operandf1(), operandf2()));
+}
 
-document.getElementById("ausgabe3.2.14").innerHTML = "";
+quatre( add, identityf(3), identityf(4), store );
+document.getElementById("ausgabe3.2.14").innerHTML = variable === 7;
 
 // Aufgabe 3.2.15
+function unaryc(func){
+    return function(value, resultf){
+        resultf(func(value));
+    }
+}
 
-
-document.getElementById("ausgabe3.2.15").innerHTML = "";
+sqrtc = unaryc(Math.sqrt);
+sqrtc(81, store);
+document.getElementById("ausgabe3.2.15").innerHTML = variable === 9;
 
 // Aufgabe 3.2.16
+function binaryc(func){
+    return function(value1, value2, resultf){
+        resultf(func(value1, value2));
+    }
+}
 
-
-document.getElementById("ausgabe3.2.16").innerHTML = "";
+addc = binaryc(add);
+addc(4, 5, store);
+document.getElementById("ausgabe3.2.16.1").innerHTML = variable === 9;
+mulc = binaryc(mul);
+mulc(2, 3, store);
+document.getElementById("ausgabe3.2.16.2").innerHTML = variable === 6;
