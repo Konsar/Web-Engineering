@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rednerliste</title>
+        <style>
+            button.delete, button.timer, p.counter {
+                margin-left: 10px;
+            }
+        </style>
+
+        <script src="rednerliste.js"></script>
+    </head>
+    <body onload="add_eventListener()">
+        <h1>Rednerliste</h1>
+        
+        <p style="display:inline-block">Neuer Redner:</p>
+        <input id="orator" type="text"> <!-- Type wird nur gesetzt um sicher zu gehen. Ohne Spezifikation ist dies auch vom Typ text. Siehe https://www.w3schools.com/tags/tag_input.asp -->
+        <button id="add_orator">Hinzufügen</button>
+
+        <!-- ul tag, da eine ungeorndete Liste im bereitgestellen Bild genutzt wurde. Siehe https://www.w3schools.com/html/html_lists.asp -->
+        <ul id="orator_list">
+        </ul>
+    </body>
+</html>
