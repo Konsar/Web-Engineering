@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Einkaufsliste</title>
+        <style>
+            button.delete {
+                margin-left: 10px;
+            }
+        </style>
+
+        <script src="einkaufsliste.js"></script>
+    </head>
+    <body onload="add_eventListener()">
+        <h1>Einkaufsliste</h1>
+        <!-- Ja, die unteren Texte sind auf Englisch, da das dies so im bereitgestellten Bild war. -->
+        <p style="display:inline-block">Enter a new item:</p>
+        <input id="item" type="text"> <!-- Type wird nur gesetzt um sicher zu gehen. Ohne Spezifikation ist dies auch vom Typ text. Siehe https://www.w3schools.com/tags/tag_input.asp -->
+        <button id="add_item">Add item</button>
+
+        <!-- ul tag, da eine ungeorndete Liste im bereitgestellen Bild genutzt wurde. Siehe https://www.w3schools.com/html/html_lists.asp -->
+        <ul id="shopping_list"></ul>
+    </body>
+</html>
