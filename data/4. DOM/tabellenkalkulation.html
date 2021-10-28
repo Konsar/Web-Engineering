@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tabellenkalkulation</title>
+
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+            td {
+                border: 1px solid black;
+                width: 100px;
+            }
+            input {
+                border-style: none;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+            button.adjust_table {
+                width: 25px;
+                height: 25px;
+            }
+        </style>
+
+        <script src="tabellenkalkulation.js"></script>
+    </head>
+    <body onload="initialize()">
+        <h1>Tabellenkalkulation mit contentEditable</h1>
+
+        <!-- Siehe https://www.w3schools.com/html/html_tables.asp -->
+        <table id="table">
+            <tr>
+                <th></th>
+                <th id="remove_col_cell">
+                    <button class="adjust_table" id="remove_col">-</button>
+                </th>
+                <th id="add_col_cell">
+                    <button class="adjust_table" id="add_col">+</button>
+                </th>
+            </tr>
+            <tr id="remove_row_cell">
+                <th>
+                    <button class="adjust_table" id="remove_row">-</button>
+                </th>
+            </tr>
+            <tr id="add_row_cell">
+                <th>
+                    <button class="adjust_table" id="add_row">+</button>
+                </th>
+            </tr>
+        </table>
+    </body>
+</html>
