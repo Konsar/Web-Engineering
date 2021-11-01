@@ -136,13 +136,13 @@ function calc(){
     var cells = document.getElementsByTagName("input"); //Diesmal nicht die eigentlichen Zellen, sondern deren Input
     for(let i = 0; i < cells.length; i++){ //Durchlaufe alle Zellen
         var formula = cells[i].getAttribute("formula"); //Extrahiere Formel
-        formula = formula.replace(" ", ""); //Remove any spaces
 
-        //Warum auch immer werden diese Ausdrücke in JS nicht gematcht
         //var regex_sum1 = new RegExp("^=SUM\([A-Z]+\d+\,\s?[A-Z]+\d+\)"); // =SUM(A1,B2) oder =SUM(A1, B2)
         //var regex_sum2 = new RegExp("^=SUM\([A-Z]+\d+\:[A-Z]+\d+\)"); // =SUM(A1:B2)
         //var regex_sum = new RegExp("^=SUM\([A-Z]+\d+[\,,\:]\s?[A-Z]+\d+\)"); //Kombination für die beiden obigen
 
+        //----- ALTE LÖSUNG -----
+        /*formula = formula.replace(" ", ""); //Remove any spaces
         var regex_sum = new RegExp("=SUM\(.*\)");
         if(regex_sum.test(formula)){ //Wenn Summe berechnet werden soll
             //alert("Regex");
@@ -159,6 +159,22 @@ function calc(){
             var x = ids[0];
             var y = ids[1];
             cells[i].value = sum(x, y);
+        }*/
+
+        //----- NEUE LÖSUNG -----
+        var regex_sum = /^=SUM\([A-Z]+\d+[\,,\:]\s?[A-Z]+\d+\)/; //RegExp anders festgelegt
+        if(regex_sum.test(formula)){
+            let formatted_formula = formula.replace(" ", ""); //Remove any spaces
+            formatted_formula = formatted_formula.replace("=SUM(", ""); //Linke Klammer ( löschen
+            formatted_formula = formatted_formula.replace(")", ""); //Rechte Klammer ) löschen
+
+            if(formatted_formula.includes(",")){ //Wenn ,
+                ids = formatted_formula.split(",");
+            } else { //Sonst :
+                ids = formatted_formula.split(":");
+            }
+
+            cells[i].value = sum(ids[0], ids[1]);
         }
     }
 }
@@ -186,8 +202,8 @@ function sum(x, y){
     y_split[1] = Number.parseInt(y_split[1]);
 
     //Wenn außerhalb der Zellen
-    if(x_split[0] < 64 || y_split[0] - 64 > col_amount) return "Error";
-    else if(x_split[1] < 1 || y_split[1] > row_amount) return "Error";
+    if(x_split[0] < 64 || y_split[0] - 64 > col_amount) return "Error: OoB (Columns)";
+    else if(x_split[1] < 1 || y_split[1] > row_amount) return "Error: OoB (Rows)";
 
     //Aufaddieren
     var sum = 0;
