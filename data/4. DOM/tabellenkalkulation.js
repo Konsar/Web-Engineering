@@ -141,6 +141,7 @@ function calc(){
         //Warum auch immer werden diese Ausdrücke in JS nicht gematcht
         //var regex_sum1 = new RegExp("^=SUM\([A-Z]+\d+\,\s?[A-Z]+\d+\)"); // =SUM(A1,B2) oder =SUM(A1, B2)
         //var regex_sum2 = new RegExp("^=SUM\([A-Z]+\d+\:[A-Z]+\d+\)"); // =SUM(A1:B2)
+        //var regex_sum = new RegExp("^=SUM\([A-Z]+\d+[\,,\:]\s?[A-Z]+\d+\)"); //Kombination für die beiden obigen
 
         var regex_sum = new RegExp("=SUM\(.*\)");
         if(regex_sum.test(formula)){ //Wenn Summe berechnet werden soll
