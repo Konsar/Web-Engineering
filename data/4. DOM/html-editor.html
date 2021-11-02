@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML-Editor</title>
+
+        <script src="html-editor.js"></script>
+
+        <style>
+            html, body {
+                height: 100%;
+            }
+            div.editor{
+                border: 1px solid black;
+                width: 50%;
+                height: 50%;
+                resize: both;
+                overflow: auto;
+            }
+            .toolbar{
+                width: 30px;
+                height: 30px;
+            }
+        </style>
+    </head>
+    <body onload="initialize()">
+        <h1>HTML-Editor</h1>
+        <!-- Bold, Italic, Underlined -->
+        <button class="toolbar" title="Bold" onclick="apply('bold')"><b>B</b></button>
+        <button class="toolbar" title="Italic" onclick="apply('italic')"><i>I</i></button>
+        <button class="toolbar" title="Underlined" onclick="apply('underline')"><u>U</u></button>
+        <!-- Justify Left, Center, Right -->
+        <button class="toolbar" title="Justify Left" stlye="align:left" onclick="apply('justifyLeft')"><<</button>
+        <button class="toolbar" title="Justify Center" stlye="align:center" onclick="apply('justifyCenter')">--</button>
+        <button class="toolbar" title="Justify Right" stlye="align:right" onclick="apply('justifyRight')">>></button>
+        <!-- Re-/Undo -->
+        <button class="toolbar" title="Undo" onclick="apply('undo')">&#10226;</button>
+        <button class="toolbar" title="Redo" onclick="apply('redo')">&#10227;</button>
+        <!-- Header -->
+        <button class="toolbar" title="Header 1" onclick="apply('formatBlock', 'h1')">H1</button>
+        <button class="toolbar" title="Header 2" onclick="apply('formatBlock', 'h2')">H2</button>
+        <button class="toolbar" title="Header 3" onclick="apply('formatBlock', 'h3')">H3</button>
+        <p></p>
+        <div class="editor" contenteditable>My HTML-Editor</div>
+    </body>
+</html>
