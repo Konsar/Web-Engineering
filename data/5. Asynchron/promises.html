@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Promises</title>
+    </head>
+    <body>
+        <h1>Promises</h1>
+
+        <p>Textdateien A.txt und B.txt werden konkateniert. A enthält die Zahlen [1, 30]. B enthält die Buchstaben [a, z].</p>
+        
+        <ol id="list"></ol>
+    </body>
+    <script>
+        // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+
+        var textA = "";
+        var textB = "";
+
+        function load(){
+            Promise.all([
+                //Fetch-Promise für Textdatei A.txt
+                fetch("A.txt")
+                    .then(response => response.text() //https://developer.mozilla.org/en-US/docs/Web/API/Response/text
+                    .then(function(text) {
+                        textA = text;
+                    })
+                ),
+
+                //Fetch-Promise für Textdatei B.txt
+                fetch("B.txt")
+                    .then(response => response.text() //https://developer.mozilla.org/en-US/docs/Web/API/Response/text
+                    .then(function(text) {
+                        textB = text;
+                    })
+                )
+                //console.log(textA);
+                //console.log(textB);
+            ]).then(() => concatenate());
+        }
+
+        function concatenate(){
+            let text1 = textA.split(/[\r,\n]+/);
+            console.log(text1);
+            let text2 = textB.split(/[\r,\n]+/);
+            console.log(text2);
+            let list = document.getElementById("list");
+
+            for(var i = 0; i < text1.length; i++){
+                let li = document.createElement("li");
+                if(i < text2.length){
+                    li.innerHTML = text1[i] + text2[i];
+                } else {
+                    li.innerHTML = text1[i];
+                }
+                list.appendChild(li);
+            }
+            for(i; i < text2.length; i++){
+                let li = document.createElement("li");
+                li.innerHTML = text2[i];
+                list.appendChild(li);
+            }
+        }
+
+        load();
+    </script>
+</html>

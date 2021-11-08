@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web Worker</title>
+        <style>
+            div.progress{
+                background-color: black;
+                height: 50px;
+                width: 500px;
+            }
+            div.bar{
+                background-color: green;
+                height: 100%;
+                width: 5px;
+            }
+            button.calculate{
+                height: 30px;
+                width: 400px;
+                margin-top: 10px;
+                margin-left: 50px;
+                margin-right: 50px;
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Prime Numbers</h1>
+        <div class="progress">
+            <div class="bar" id="bar"></div>
+        </div>
+        <button class="calculate" id="button">Start calculating</button>
+        <p id="list"></p>
+    </body>
+    <script>
+        function progressbar(){ //https://www.w3schools.com/howto/howto_js_progressbar.asp
+            let interval = null;
+            var bar = document.getElementById("bar");
+            let width = 0;
+            let direction = -1;
+
+            function frame(){
+                if(width == 0 || width == 100) {
+                    direction *= -1;
+                }
+                width += direction;
+                bar.style.width = width + "%";
+            }
+            return{
+                start:function(){
+                    if(interval == null) interval = setInterval(frame, 16);
+                },
+                stop:function(){
+                    clearInterval(interval);
+                    interval = null;
+                }
+            }
+        }
+        
+        let progress = new progressbar();
+
+        const worker = new Worker("webworker.js");
+        var list = document.getElementById("list");
+        let limit = 1000000;
+
+        document.getElementById("button").addEventListener("click", function() {
+            progress.start();
+            worker.postMessage(limit);
+        });
+
+        worker.addEventListener("message", function(e){
+            if(e.data == -1){
+                progress.stop();
+                return;
+            }
+            list.innerHTML += " " + e.data;
+
+            //Effizienter ist es als Liste
+            /*let li = document.createElement("li");
+            li.innerHTML = e.data;
+            list.appendChild(li);*/
+        })
+    </script>
+    </body>
+</html>

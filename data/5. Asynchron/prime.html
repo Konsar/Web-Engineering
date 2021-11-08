@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Prime Numbers</title>
+        <style>
+            div.progress{
+                background-color: black;
+                height: 50px;
+                width: 500px;
+            }
+            div.bar{
+                background-color: green;
+                height: 100%;
+                width: 5px;
+            }
+            button.calculate{
+                height: 30px;
+                width: 400px;
+                margin-top: 10px;
+                margin-left: 50px;
+                margin-right: 50px;
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Prime Numbers</h1>
+        <div class="progress">
+            <div class="bar" id="bar"></div>
+        </div>
+        <button class="calculate" id="button">Start calculating</button>
+        <p id="list"></p>
+    </body>
+    <script>
+        function progressbar(){ //https://www.w3schools.com/howto/howto_js_progressbar.asp
+            let interval = null;
+            var bar = document.getElementById("bar");
+            let width = 0;
+            let direction = -1;
+
+            //var counter = 20000000;
+            var counter = 2;
+            var limit = 50000000;
+            var list = document.getElementById("list");
+
+            function frame(){
+                if(width == 0 || width == 100) {
+                    direction *= -1;
+                }
+                width += direction;
+                bar.style.width = width + "%";
+
+                if(isPrime(counter)){
+                    /*let li = document.createElement("li");
+                    li.innerHTML = counter;
+                    list.appendChild(li);*/
+                    list.innerHTML = list.innerHTML + " " + counter;
+                }
+                counter++;
+                if(counter >= limit){
+                    clearInterval(interval);
+                    interval = null;
+                }
+            }
+            return{
+                start:function(){
+                    if(interval == null) interval = setInterval(frame, 16);
+                }
+            }
+        }
+
+        function isPrime(number){
+            for(let i = 2; i < number; i++){
+                if(number % i == 0) return false;
+            }
+            return true;
+        }
+
+        
+        let progress = new progressbar();
+        document.getElementById("button").addEventListener("click", progress.start);
+    </script>
+</html>
