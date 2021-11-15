@@ -1,0 +1,47 @@
+[
+    {
+        "fraktion":"SPD",
+        "sitze":206,
+        "farbe":"red"
+    },
+
+    {
+        "fraktion":"CDU/CSU",
+        "sitze":197,
+        "farbe":"black"
+    },
+
+    {
+        "fraktion":"Bündnis 90/Die Grünen",
+        "sitze":118,
+        "farbe":"green"
+    },
+
+    {
+        "fraktion":"FDP",
+        "sitze":92,
+        "farbe":"yellow"
+    },
+
+    {
+        "fraktion":"AfD",
+        "sitze":82,
+        "farbe":"blue"
+    },
+
+    {
+        "fraktion":"Die Linke",
+        "sitze":39,
+        "farbe":"deeppink"
+    },
+
+    {
+        "fraktion":"Fraktionslos",
+        "sitze":2,
+        "farbe":"grey"
+    },
+
+    {
+        "gesamt":736
+    }
+]

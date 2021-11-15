@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Statistik-Balkendiagramm</title>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <style>
+            svg{
+                width:35%;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Sitzverteilung des 20. Bundestages</h1>
+        <svg viewbox="0 0 300 350"></svg>
+    </body>
+    <script>
+        let diagram = d3.select("svg");
+
+        fetch("sitzverteilung.json")
+                .then(response => response.text()
+                .then(function(text) {
+                    visualize(JSON.parse(text));
+                })
+            )
+
+        function visualize(data){
+            console.log(data);
+            for(let i = 0; i < Object.keys(data).length - 1; i++){
+                diagram.append("text")
+                        .attr("x", 0) //Text ganz links
+                        .attr("y", (300/data.length - 1)*i + 12) //Höhe mit Offset um es zu "zentrieren"
+                        .style("font-size", "5px")
+                        .text(data[i]["fraktion"]); //Fraktionsname
+
+                diagram.append("rect")
+                        .attr("x", 50) //Rechts einrücken, damit links Platz für den Fraktionsnamen ist
+                        .attr("y", (300/data.length - 1)*i) //Höhewert / Verteilen der Fraktionen
+                        .attr("height", (150/Object.keys(data).length)) //Dicke des Rechtecks
+                        .transition() //Animiere alles nachfolgende...
+                        .duration(500) //... innerhalb von x Millisekunden
+                        .attr("width", (data[i]["sitze"]/data.at(-1)["gesamt"])*300) //Breite des Rechtecks
+                        .attr("fill", data[i]["farbe"]); //Farbe des Rechtecks
+                
+                diagram.append("text")
+                        .attr("x", (data[i]["sitze"]/data.at(-1)["gesamt"])*300 + 55) //Hinter das Rechteck
+                        .attr("y", (300/data.length - 1)*i + 12) //Höhe mit Offset
+                        .style("font-size", "5px")
+                        .text(data[i]["sitze"]); //Anzahl der Sitze
+            }
+        }
+    </script>
+</html>
