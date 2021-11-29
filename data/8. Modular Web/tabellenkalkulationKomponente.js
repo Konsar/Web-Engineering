@@ -153,8 +153,8 @@ customElements.define('tabellenkalkulation-komponente', class extends HTMLElemen
         
             var cells = shadow.getElementById("table").getElementsByTagName("td"); //Greift alle Inhaltszellen ab
             for(let i = 0; i < cells.length; i++){
-                children = cells[i].children;
-                id = "" + children[0].id
+                let children = cells[i].children;
+                let id = "" + children[0].id
                 //alert(id);
                 if(id.includes(col_symbol)) cells[i].remove();
             }
