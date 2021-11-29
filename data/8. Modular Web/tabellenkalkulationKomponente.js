@@ -214,9 +214,9 @@ customElements.define('tabellenkalkulation-komponente', class extends HTMLElemen
                     formatted_formula = formatted_formula.replace(")", ""); //Rechte Klammer ) löschen
         
                     if(formatted_formula.includes(",")){ //Wenn ,
-                        ids = formatted_formula.split(",");
+                        var ids = formatted_formula.split(",");
                     } else { //Sonst :
-                        ids = formatted_formula.split(":");
+                        var ids = formatted_formula.split(":");
                     }
         
                     cells[i].value = sum(ids[0], ids[1]);
