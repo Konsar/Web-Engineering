@@ -1,5 +1,4 @@
 var data = "";
-const base_url = location.protocol + "//" + location.host + location.pathname;
 
 async function initialize(){
     await load();
@@ -8,11 +7,9 @@ async function initialize(){
     let params = [search_params.get("m"), search_params.get("s")];
     console.log("URL params found: " + params);
     if(params[0] != null){ //Wenn ein Hauptpunkt gedrückt wurde, erstelle Sidebar
-        document.getElementById(params[0]).style.background="grey";
         load_sidebar(params[0]);
     }
     if(params[0] != null && params[1] != null){ //Wenn ein Hauptpunt UND ein Unterpunkt gedrückt wurde, lade Inhalt
-        document.getElementById(params[1]).style.background="grey";
         load_content(params[0], params[1]);
     }
 }
@@ -36,8 +33,9 @@ function load_main_menu(){ //Lädt Hauptmenü
         menu_link.innerHTML = main_keys[i];
         menu_link.id = main_keys[i];
         menu_link.setAttribute("href", "?m=" + main_keys[i]);
-        mainmenu.append(menu_link);
+        mainmenu.appendChild(menu_link);
     }
+    mainmenu.requestUpdate();
 }
 
 function load_sidebar(m){ //Lädt Untermenü
@@ -51,6 +49,7 @@ function load_sidebar(m){ //Lädt Untermenü
         side_link.setAttribute("href", "?m=" + m + "&s=" + side_keys[i]);
         sidemenu.appendChild(side_link);
     }
+    sidemenu.requestUpdate();
 }
 
 function load_content(m, s){ //Lädt Context (Content + References)

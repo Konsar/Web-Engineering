@@ -50,10 +50,6 @@ customElements.define('litmenu-component', class extends LitElement {
   
     render() {
         let list = Array.from(this.getElementsByTagName("a"));
-        console.log(this);
-        console.log(this.getElementsByTagName("a"));
-        console.log(this.shadowRoot);
-        console.log("-----");
         return html`
             <div class="menu ${this.alignment}">
                 ${(list.map(element => html`<button>${element}</button>`))}
