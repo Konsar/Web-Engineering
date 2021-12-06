@@ -1,0 +1,28 @@
+{
+    "name": "PWA Beispiel",
+    "short_name": "PAW",
+    "start_url": "./www-navigator.html",
+    "background_color": "#04B404",
+    "theme_color": "#04B404",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "images/icons-128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "images/icons-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "images/icons-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ]
+}
